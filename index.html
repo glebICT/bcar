@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Brennan — Hill Climb Racer</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Gameplay canvas -->
+    <canvas id="game"></canvas>
+
+    <!-- In-game HUD -->
+    <div id="hud" class="hidden">
+      <div class="hud-top">
+        <div class="hud-stat"><span class="hud-label">DIST</span><span id="hud-distance">0 m</span></div>
+        <div class="hud-stat"><span class="hud-label">COINS</span><span id="hud-coins">0</span></div>
+        <div class="hud-stat"><span class="hud-label">BEST</span><span id="hud-best">0 m</span></div>
+      </div>
+      <div class="hud-fuel">
+        <div class="hud-label">FUEL</div>
+        <div class="fuel-bar"><div id="fuel-fill"></div></div>
+      </div>
+      <button id="btn-pause" class="icon-btn" title="Pause">II</button>
+      <div class="touch-controls">
+        <button id="touch-brake" class="touch-btn">◀ BRAKE</button>
+        <button id="touch-gas" class="touch-btn">GAS ▶</button>
+      </div>
+    </div>
+
+    <!-- Main menu -->
+    <div id="screen-menu" class="screen">
+      <div class="screen-inner">
+        <h1 class="logo">BRENNAN</h1>
+        <p class="tagline">Hill Climb Racing</p>
+        <div class="menu-coins">🪙 <span id="menu-coins">0</span></div>
+        <div class="menu-buttons">
+          <button class="btn btn-primary" data-goto="levelSelect">PLAY</button>
+          <button class="btn" data-goto="garage">GARAGE</button>
+          <button class="btn btn-ghost" id="btn-reset">RESET SAVE</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Level / track select -->
+    <div id="screen-levelSelect" class="screen hidden">
+      <div class="screen-inner wide">
+        <div class="screen-head">
+          <button class="btn btn-back" data-goto="menu">← MENU</button>
+          <h2>SELECT TRACK</h2>
+          <div class="menu-coins small">🪙 <span class="coins-mirror">0</span></div>
+        </div>
+        <div id="track-list" class="track-list"></div>
+      </div>
+    </div>
+
+    <!-- Garage -->
+    <div id="screen-garage" class="screen hidden">
+      <div class="screen-inner wide">
+        <div class="screen-head">
+          <button class="btn btn-back" data-goto="menu">← MENU</button>
+          <h2>GARAGE</h2>
+          <div class="menu-coins small">🪙 <span class="coins-mirror">0</span></div>
+        </div>
+        <div class="garage-grid">
+          <div class="garage-preview">
+            <canvas id="garage-canvas" width="420" height="240"></canvas>
+            <div class="car-switch">
+              <button id="car-prev" class="icon-btn">◀</button>
+              <div class="car-name" id="garage-car-name">—</div>
+              <button id="car-next" class="icon-btn">▶</button>
+            </div>
+            <button id="btn-buy-car" class="btn btn-primary hidden">BUY</button>
+            <button id="btn-select-car" class="btn hidden">SELECT</button>
+            <div class="paint-row" id="paint-row"></div>
+          </div>
+          <div class="garage-upgrades" id="upgrade-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pause overlay -->
+    <div id="screen-pause" class="screen overlay hidden">
+      <div class="screen-inner narrow">
+        <h2>PAUSED</h2>
+        <div class="menu-buttons">
+          <button class="btn btn-primary" id="btn-resume">RESUME</button>
+          <button class="btn" id="btn-restart">RESTART</button>
+          <button class="btn btn-ghost" data-goto="levelSelect">QUIT TO TRACKS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results (complete / failed) -->
+    <div id="screen-results" class="screen overlay hidden">
+      <div class="screen-inner narrow">
+        <h2 id="results-title">FINISHED!</h2>
+        <div class="results-stats">
+          <div class="result-row"><span>Distance</span><strong id="result-distance">0 m</strong></div>
+          <div class="result-row"><span>Coins collected</span><strong id="result-coins">0</strong></div>
+          <div class="result-row reward"><span>Reward</span><strong id="result-reward">0</strong></div>
+        </div>
+        <div class="menu-buttons">
+          <button class="btn btn-primary" id="btn-next">CONTINUE</button>
+          <button class="btn" id="btn-retry">RETRY</button>
+          <button class="btn btn-ghost" data-goto="garage">GARAGE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
